@@ -1,6 +1,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { coinListTool } from './tools/coins.js';
+import { registerTools } from './tools/toolFactory.js';
+import { allToolConfigs } from './tools/toolConfigs.js';
 
 // Create server instance
 const server = new McpServer({
@@ -12,7 +13,8 @@ const server = new McpServer({
     },
 });
 
-server.tool(coinListTool.name, coinListTool.description, coinListTool.parameters, coinListTool.handler);
+// Register all tools from configurations
+registerTools(server, allToolConfigs);
 
 async function main() {
     const transport = new StdioServerTransport();
