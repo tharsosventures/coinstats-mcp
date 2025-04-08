@@ -42,8 +42,17 @@ export async function universalApiHandler<T>(
     content: Array<{ type: 'text'; text: string; isError?: boolean }>;
 }> {
     try {
+        // MCP clients might not support '~' in parameter names, so we replace '-' with '~' specifically for the /coins endpoint before making the request.
+        let processedParams = params;
+        if (endpoint === '/coins') {
+            processedParams = Object.entries(params).reduce((acc, [key, value]) => {
+                acc[key.replace(/-/g, '~')] = value;
+                return acc;
+            }, {} as Record<string, any>);
+        }
+
         const url = `${basePath}${endpoint}`;
-        const data = await makeRequestCsApi<T>(url, method, params, body);
+        const data = await makeRequestCsApi<T>(url, method, processedParams, body);
 
         if (!data) {
             return {
