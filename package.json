@@ -1,6 +1,6 @@
 {
-    "name": "coinstats-mcp",
-    "version": "1.0.0",
+    "name": "@coinstats/coinstats-mcp",
+    "version": "1.0.1",
     "description": "MCP server for CoinStats API integration",
     "main": "dist/index.js",
     "bin": {
