@@ -16,7 +16,7 @@
         "mcp",
         "model context protocol"
     ],
-    "author": "",
+    "author": "CoinStats",
     "license": "ISC",
     "scripts": {
         "build": "npm i && npm run build:types && npm run build:js && shx chmod +x dist/*.js",
@@ -37,10 +37,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/username/coinstats-mcp.git"
+        "url": "git+https://github.com/CoinStatsHQ/coinstats-mcp.git"
     },
     "bugs": {
-        "url": "https://github.com/username/coinstats-mcp/issues"
+        "url": "https://github.com/CoinStatsHQ/coinstats-mcp/issues"
     },
-    "homepage": "https://github.com/username/coinstats-mcp#readme"
+    "homepage": "https://github.com/CoinStatsHQ/coinstats-mcp#readme"
 }
