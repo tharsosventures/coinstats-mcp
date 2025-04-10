@@ -21,7 +21,7 @@ Add the following to your client configuration:
       "command": "npx",
       "args": [
         "-y",
-        "coinstats-mcp"
+        "@coinstats/coinstats-mcp"
       ],
       "env": {
         "COINSTATS_API_KEY": "<YOUR_API_KEY>"
@@ -44,6 +44,8 @@ Replace `<YOUR_API_KEY>` with your actual CoinStats API key.
         "run",
         "-i",
         "--rm",
+        "-e",
+        "COINSTATS_API_KEY",
         "coinstats/coinstats-mcp"
       ],
       "env": {
