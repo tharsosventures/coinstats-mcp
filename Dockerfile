@@ -1,21 +1,25 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18-alpine
+FROM node:18-alpine AS builder
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# Copy project files
+COPY . /app
+WORKDIR /app
 
-# Copy package.json and package-lock.json first
-# to leverage Docker cache
-COPY package*.json ./
+RUN --mount=type=cache,target=/root/.npm npm install
 
-# Install project dependencies (only production)
-# Assumes build (tsc) happens *before* docker build
-RUN npm install --only=production
+RUN --mount=type=cache,target=/root/.npm npm run build
 
-# Copy the rest of the application code, including the pre-built dist folder
-COPY . .
+RUN --mount=type=cache,target=/root/.npm-production npm ci --ignore-scripts --omit=dev
 
-# The MCP server listens on stdin/stdout, so no EXPOSE needed
+FROM node:18-alpine AS release
 
-# Command to run the application using the main script from package.json
-CMD ["node", "dist/index.js"] 
+COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app/package.json /app/package.json
+COPY --from=builder /app/package-lock.json /app/package-lock.json
+
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+RUN npm ci --ignore-scripts --omit=dev
+
+ENTRYPOINT ["node", "dist/index.js"] 

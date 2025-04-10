@@ -44,6 +44,8 @@ Replace `<YOUR_API_KEY>` with your actual CoinStats API key.
         "run",
         "-i",
         "--rm",
+        "-e",
+        "COINSTATS_API_KEY",
         "coinstats/coinstats-mcp"
       ],
       "env": {
