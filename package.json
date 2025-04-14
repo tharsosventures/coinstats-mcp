@@ -1,6 +1,6 @@
 {
     "name": "@coinstats/coinstats-mcp",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "MCP server for CoinStats API integration",
     "main": "dist/index.js",
     "bin": {
@@ -14,7 +14,10 @@
         "crypto",
         "api",
         "mcp",
-        "model context protocol"
+        "model context protocol",
+        "ai",
+        "mcp server",
+        "coinstats mcp"
     ],
     "author": "CoinStats",
     "license": "ISC",
