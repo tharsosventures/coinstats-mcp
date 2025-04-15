@@ -1,6 +1,6 @@
 {
     "name": "@coinstats/coinstats-mcp",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "MCP server for CoinStats API integration",
     "main": "dist/index.js",
     "bin": {
@@ -20,7 +20,7 @@
         "coinstats mcp"
     ],
     "author": "CoinStats",
-    "license": "ISC",
+    "license": "MIT",
     "scripts": {
         "build": "npm i && npm run build:types && npm run build:js && shx chmod +x dist/*.js",
         "build:js": "tsc",
