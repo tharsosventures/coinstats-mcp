@@ -70,4 +70,4 @@ This command installs dependencies, compiles TypeScript to JavaScript, and sets 
 
 ## License
 
-This MCP server is licensed under the ISC License. See the standard [ISC License text](https://opensource.org/licenses/ISC) for details.
+This MCP server is licensed under the MIT License. See the standard [MIT License text](https://opensource.org/licenses/MIT) for details.
