@@ -42,16 +42,37 @@ export async function universalApiHandler<T>(
     content: Array<{ type: 'text'; text: string; isError?: boolean }>;
 }> {
     try {
+        // Handle path parameters - replace {paramName} in endpoint with actual values
+        let processedEndpoint = endpoint;
+        let processedParams = { ...params };
+
+        // Find all path parameters in the endpoint (e.g., {coinId}, {id}, {type})
+        const pathParamMatches = endpoint.match(/\{([^}]+)\}/g);
+
+        if (pathParamMatches) {
+            for (const match of pathParamMatches) {
+                const paramName = match.slice(1, -1); // Remove { and }
+
+                if (processedParams[paramName] !== undefined) {
+                    // Replace the placeholder with the actual value
+                    processedEndpoint = processedEndpoint.replace(match, processedParams[paramName]);
+                    // Remove the parameter from query params since it's now part of the path
+                    delete processedParams[paramName];
+                } else {
+                    throw new Error(`Required path parameter '${paramName}' is missing`);
+                }
+            }
+        }
+
         // MCP clients might not support '~' in parameter names, so we replace '-' with '~' specifically for the /coins endpoint before making the request.
-        let processedParams = params;
         if (endpoint === '/coins') {
-            processedParams = Object.entries(params).reduce((acc, [key, value]) => {
+            processedParams = Object.entries(processedParams).reduce((acc, [key, value]) => {
                 acc[key.replace(/-/g, '~')] = value;
                 return acc;
             }, {} as Record<string, any>);
         }
 
-        const url = `${basePath}${endpoint}`;
+        const url = `${basePath}${processedEndpoint}`;
         const data = await makeRequestCsApi<T>(url, method, processedParams, body);
 
         if (!data) {
