@@ -62,6 +62,10 @@ Replace `<YOUR_API_KEY>` with your actual CoinStats API key.
 
 Replace `<YOUR_API_KEY>` with your actual CoinStats API key.
 
+#### Cursor
+
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=coinstats-mcp&config=eyJjb21tYW5kIjoibnB4IC15IEBjb2luc3RhdHMvY29pbnN0YXRzLW1jcCIsImVudiI6eyJDT0lOU1RBVFNfQVBJX0tFWSI6IiJ9fQ%3D%3D)
+
 ## Build
 
 To build the project locally:
